@@ -24,6 +24,8 @@ public:
 
 	bool OnUserUpdate(float fElapsedTime) override
 	{
+		if (GetKey(olc::Key::ESCAPE).bPressed)
+			return false;
 		// called once per frame
 		for (int x = 0; x < ScreenWidth(); x++)
 			for (int y = 0; y < ScreenHeight(); y++)
@@ -34,7 +36,7 @@ public:
 
 int main() {
 	Simulation simulation;
-	if (simulation.Construct(1980, 1080, 1, 1))
+	if (simulation.Construct(1920, 1080, 1, 1, 1))
 		simulation.Start();
 	return 0;
 }
