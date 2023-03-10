@@ -13,23 +13,26 @@ public:
 	}
 
 private:
+	EntityGenes* preyGenes;
 	Entity* testEntity;
 
 public:
 	bool OnUserCreate() override
 	{
-		testEntity = new Entity(0, 69.420, 420.420);
+		preyGenes = new EntityGenes(1.0, 1.0, 1.0, 1.0, 1.0);
+		testEntity = new Entity(0, 69.420, 420.420, preyGenes);
 		return true;
 	}
 
 	bool OnUserUpdate(float fElapsedTime) override
 	{
+		// Input
 		if (GetKey(olc::Key::ESCAPE).bPressed)
 			return false;
-		// called once per frame
-		for (int x = 0; x < ScreenWidth(); x++)
-			for (int y = 0; y < ScreenHeight(); y++)
-				Draw(x, y, olc::Pixel(rand() % 255, rand() % 255, rand() % 255));
+		
+		// Render
+		FillRectDecal(olc::vf2d(testEntity->pos.x, testEntity->pos.y), olc::vi2d(5, 5), olc::WHITE);
+
 		return true;
 	}
 };
